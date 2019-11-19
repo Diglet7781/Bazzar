@@ -48,6 +48,7 @@
                <h1>Sign In</h1>
                <input type="text" placeholder="Username" name="username">
                <input type="password" placeholder="Password" name="password">
+               <span id="error"></span>
                <button type="submit" name="submitSignIn">Sign In</button>
                
             </form>

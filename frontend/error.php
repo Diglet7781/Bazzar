@@ -12,19 +12,10 @@
    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
    <link rel = "stylesheet" href ="testFile.css" rel="stylesheet"/>
    <link rel = "stylesheet" href ="navBarAndFooterStyles.css" rel="stylesheet"/>
-    <style>
-        #addInventory{
-            padding-left:100px;
-            padding-top:50px;
-            background-color:teal;
-            font-weight:bolder;
-        }
 
-    </style>
 
 
 <body>
-
 
 
 
@@ -60,46 +51,14 @@
                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
             <div class = "button">
-               <button type="button" class="btn btn-danger"><?php 
-                    if(isset($_SESSION['username'])){
-                        echo $_SESSION['username'];
-                        }
-                    else{
-                        echo '<a href="userAccess.php">GetStarted</a>';
-                        }
-                        ?>
-                </button>
+               <button type="button" class="btn btn-danger"><a href="userAccess.php">Get Started!</a></button>
             </div>
          </div>
       </nav>
 
 
 
-    <div id="addInventory" style="color:black;">
-      <form id="inventoryForm"action="../backend/addinventory.php" method="post" enctype="multipart/form-data">
-            Product Name:<input type="text"name="itemName" placeholder="Product Name">
-            <br>
-            ProductType:
-            <br>
-            Book
-            <input type="radio"name="productType" value="book">
-            Apparel
-            <input type="radio" name="productType" value="apparel">
-            <br>
-            Description:<input type="text"name="description" placeholder="product description">
-            <br>
-            Quantity:<input type="text"name="quantity" placeholder="quantity">
-            <br>
-            Price per item:<input type="text"name="price" placeholder="price">
-            <br>
-            pictures:<input type="file"name="picture">
-            <br><br>
-            <input type="submit"name="add"value="AddToInventory">
-            <br>
-        
-        </form>
-    
-    </div>
+<p style="color:red;">All the fields must be entered</p>
 <!-- 
 <main class="main-content">
 <div class="slideshow-container">
@@ -115,7 +74,7 @@
       <div class="carousel-caption d-none d-md-block">
        
         
-         this is for carousel overlay text
+        <!-- this is for carousel overlay text
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-8 col-xl-6 mx-auto">
@@ -162,6 +121,7 @@
 </div>
 </main>
  -->
+
 
 
       <div class="footer">

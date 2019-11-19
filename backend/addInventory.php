@@ -73,6 +73,7 @@
        $result=$connect->query($products->addItems()); 
 
                move_uploaded_file($_FILES['picture']['tmp_name'],$fileDestination);
+               header("Location:../backend/viewInventory.php");
                
                //print_r($fileDestination);
 

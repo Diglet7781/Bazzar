@@ -53,6 +53,9 @@ require_once "class/User.php";
 require_once "dblogin.php";
 //processing the form
 if (isset($_POST["submit"])){
+    if(isset($_POST['fname']) || isset($_POST['lname']) || isset($_POST['email']) || isset($_POST['accountType']) || isset($_POST['username']) || isset($_POST['password']) || isset($_POST['confirm-password']) ){
+        header("Location: ../frontend/error.php");
+    }else{
     
     //get data from the user for Registration
     $firstName = test_input($_POST["fname"]);
@@ -97,3 +100,5 @@ if (isset($_POST["submit"])){
             echo "Account Created Successfully";
     }
 }
+}
+?>

@@ -12,19 +12,19 @@
    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
    <link rel = "stylesheet" href ="testFile.css" rel="stylesheet"/>
    <link rel = "stylesheet" href ="navBarAndFooterStyles.css" rel="stylesheet"/>
-    <style>
-        #addInventory{
-            padding-left:100px;
-            padding-top:50px;
-            background-color:teal;
-            font-weight:bolder;
+   <style>
+		td{
+		border: 1px solid;
+		text-align: center;
+		padding: 0.5em;
+		}
+        #viewInventory{
+            background-color:grey;
         }
-
-    </style>
-
+	</style>
+</head>
 
 <body>
-
 
 
 
@@ -60,46 +60,102 @@
                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
             <div class = "button">
-               <button type="button" class="btn btn-danger"><?php 
-                    if(isset($_SESSION['username'])){
-                        echo $_SESSION['username'];
-                        }
-                    else{
-                        echo '<a href="userAccess.php">GetStarted</a>';
-                        }
-                        ?>
-                </button>
+               <button type="button" class="btn btn-danger"><a href="userAccess.php">Get Started!</a></button>
             </div>
          </div>
       </nav>
 
 
+      <!-- This section is for displaying the inventory-->
+      <h1>Inventory</h1>
 
-    <div id="addInventory" style="color:black;">
-      <form id="inventoryForm"action="../backend/addinventory.php" method="post" enctype="multipart/form-data">
-            Product Name:<input type="text"name="itemName" placeholder="Product Name">
-            <br>
-            ProductType:
-            <br>
-            Book
-            <input type="radio"name="productType" value="book">
-            Apparel
-            <input type="radio" name="productType" value="apparel">
-            <br>
-            Description:<input type="text"name="description" placeholder="product description">
-            <br>
-            Quantity:<input type="text"name="quantity" placeholder="quantity">
-            <br>
-            Price per item:<input type="text"name="price" placeholder="price">
-            <br>
-            pictures:<input type="file"name="picture">
-            <br><br>
-            <input type="submit"name="add"value="AddToInventory">
-            <br>
-        
-        </form>
-    
+      <!--php code begins -->
+<?php 
+	
+    require_once "../backend/dblogin.php";
+    session_start();
+    $sellerId=$_SESSION["userId"];
+    $connect = createConn();
+   $sqlBooks= "SELECT * FROM inventory WHERE productType='book' AND sellerid='$sellerId'";
+   $sqlApparels="SELECT * FROM inventory WHERE productType='apparel' AND sellerid='$sellerId'";
+   $reasult1=$connect->query($sqlApparels);
+   $reasult = $connect->query($sqlBooks);
+   ?>
+<!--end of php code -->
+<div id="viewInventory">
+   <h1>Books Inventory</h1>
+    <table>
+    <tr>
+        <th>Product ID</th>
+       <th>Product Type</th>
+        <th>Product Name</th>
+       <th>Product Description</th>
+        <th>quantity</th>
+        <th>price per item</th>
+        <th>pictures</th>
+        <th>seller ID</th>
+    </tr>
+    <!--php code begins -->
+    <?php 
+   	while($row = $reasult->fetch_assoc()){
+           $productid=$row["productid"];
+           
+   		echo   "<tr>";
+            echo    "<td>" . $row["productid"]. "</td>";
+            echo    "<td>" . $row["productType"].  "</td>";
+            echo    "<td>" . $row["productName"]. "</td>";
+            echo    "<td>" . $row["productDescription"]. "</td>";
+            echo    "<td>" . $row["quantity"]. "</td>"; 
+            echo    "<td>" . $row["price"]. "</td>";
+            echo    "<td>";
+            echo "<img style='height:50px;'src='" . $row['picture'] . "'>";
+            echo "</td>";
+            echo    "<td>" . $row["sellerid"]. "</td>";
+            echo '<td><a href="editInventory.php?id='.$productid.'">Update</a></td>';
+            echo '<td><a href="deleteItem.php?id='.$productid.'">Delete</a></td>';
+        echo "</tr>";
+       }
+       echo'<td><a href="addInventory.php"> Add new item</a></td>';
+       echo"</table";
+       
+       echo"<table>";
+       
+       echo "<tr>";
+       echo    "<th>Product ID</th>";
+       echo    "<th>Product Type</th>";
+       echo    "<th>Product Name</th>";
+       echo    "<th>Product Description</th>";
+       echo    "<th>quantity</th>";
+       echo    "<th>price per item</th>";
+       echo    "<th>pictures</th>";
+       echo    "<th>seller ID</th>";
+   echo"</tr>";
+      while($row = $reasult1->fetch_assoc()){
+        $productid=$row["productid"];
+          
+          echo   "<tr>";
+           echo    "<td>" . $row["productid"]. "</td>";
+           echo    "<td>" . $row["productType"].  "</td>";
+           echo    "<td>" . $row["productName"]. "</td>";
+           echo    "<td>" . $row["productDescription"]. "</td>";
+           echo    "<td>" . $row["quantity"]. "</td>"; 
+           echo    "<td>" . $row["price"]. "</td>";
+           echo    "<td>";
+           echo "<img style='height:50px;'src='" . $row['picture'] . "'>";
+           echo "</td>";
+           echo    "<td>" . $row["sellerid"]. "</td>";
+           echo '<td><a href="editInventory.php?id='.$productid.'">Update</a></td>';
+           echo '<td><a href="deleteItem.php?id='.$productid.'">Delete</a></td>'; 
+       echo "</tr>";
+      }
+      echo'<td><a href="addInventory.php"> Add new item</a></td>';
+       echo"</table>";
+   $connect->close();
+   ?>
+</table>
     </div>
+
+
 <!-- 
 <main class="main-content">
 <div class="slideshow-container">
@@ -115,7 +171,7 @@
       <div class="carousel-caption d-none d-md-block">
        
         
-         this is for carousel overlay text
+        <!-- this is for carousel overlay text
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-8 col-xl-6 mx-auto">
@@ -162,6 +218,7 @@
 </div>
 </main>
  -->
+
 
 
       <div class="footer">

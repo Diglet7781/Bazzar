@@ -4,11 +4,13 @@
   
     require_once "functions/validate.php";
     require_once "dblogin.php";
-   
     if(isset($_POST['submitSignIn'])){
         $username=test_input($_POST['username']);
         $password=test_input($_POST['password']);
-        echo "hello";
+        if($username=="" || $password==""){
+        header("Location: ../frontend/error.php");
+        }else{
+        
         //creating conncetion to the db
         $connect= createConn();
         $query="SELECT * From user where username='$username';";
@@ -31,16 +33,17 @@
                                         header('Location:viewHomepage.php');
                                         exit();
                                         default:
-                                        echo "create account ";
+                                        header("Location:viewHomepage.php");
                                     }
             }
             else{
                echo "password did not match";
                 }
-        }
-        else{
+            }
+            else{
             echo "please enter the correct credentials or create a new account";
              }
+         }
  
-    }
+        }
     ?>
