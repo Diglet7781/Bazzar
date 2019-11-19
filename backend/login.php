@@ -27,7 +27,7 @@
                     switch ($type)
                                     {
                                         case 'Seller':
-                                         header('Location:addinventory.php');
+                                         header('Location:../frontend/addinventory.php');
                                         exit();
                                         case 'Buyer':
                                         header('Location:viewHomepage.php');
