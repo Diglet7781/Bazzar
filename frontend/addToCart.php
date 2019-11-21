@@ -1,4 +1,3 @@
-
 <?php
 require_once "dblogin.php";
 session_start();

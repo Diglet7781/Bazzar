@@ -53,7 +53,7 @@ require_once "class/User.php";
 require_once "dblogin.php";
 //processing the form
 if (isset($_POST["submit"])){
-    if(isset($_POST['fname']) || isset($_POST['lname']) || isset($_POST['email']) || isset($_POST['accountType']) || isset($_POST['username']) || isset($_POST['password']) || isset($_POST['confirm-password']) ){
+    if(!isset($_POST['fname']) || !isset($_POST['lname']) || !isset($_POST['email']) || !isset($_POST['accountType']) || !isset($_POST['username']) || !isset($_POST['password']) || !isset($_POST['confirm-password']) ){
         header("Location: ../frontend/error.php");
     }else{
     

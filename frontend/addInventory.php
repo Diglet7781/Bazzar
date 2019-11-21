@@ -28,14 +28,15 @@
 
 
 
-      <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light" >
+
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light" >
          <div class="navbar-left">
             <a class="navbar-brand" href="">
             <img class="logo-dark" src="../img/nav2.png" width="60" height="60" class="d-inline-block align-top" alt="" alt="logo"> 
             </a>
             <div class="navbar-brand mb-1 h4">
                </span>
-               <h2> BaaZaar </h2>
+               <h2><a href="testFile.php"> BaaZaar </a></h2>
             </div>
          </div>
          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,6 +60,8 @@
                <input class="form-control mr-sm-2" type="search" placeholder="Search">
                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
+            <button><a href="../frontend/cart-view.php">ViewCart</a></button>
+            <button><a href="../frontend/addInventory.php">addInventory</a></button>
             <div class = "button">
                <button type="button" class="btn btn-danger"><?php 
                session_start();
@@ -69,12 +72,19 @@
                         echo '<a href="userAccess.php">GetStarted</a>';
                         }
                         ?>
-                </button>
-                <button><a href="../backend/logout.php">Logout</a></button>
+               </button>
+               
+               <?php
+               if(isset($_SESSION['username'])){
+
+               echo '<button><a href="../backend/logout.php">Logout</a></button>';
+               }
+               
+               ?>
             </div>
+               
          </div>
       </nav>
-
 
 
     <div id="addInventory" style="color:black;">
@@ -102,6 +112,7 @@
         </form>
     
     </div>
+    <button><a href="../frontend/viewInventory.php">viewInventory</a></button>
 <!-- 
 <main class="main-content">
 <div class="slideshow-container">

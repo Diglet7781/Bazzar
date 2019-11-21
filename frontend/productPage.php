@@ -1,3 +1,23 @@
+<?php
+$productid=$_GET['productid'];
+
+$query="SELECT * from inventory where productid='$productid';";
+
+require_once "../backend/dblogin.php";
+$connect= createConn();
+
+$result=$connect->query($query);
+
+$row=$result->fetch_assoc();
+
+$productName=$row['productName'];
+
+$productType=$row['productType'];
+$price=$row['price'];
+$productDescription=$row['productDescription'];
+$picture=$row['picture'];
+
+?>
 <!DOCTYPE html>
 <html lang = "en">
     <head>
@@ -7,28 +27,31 @@
         <meta name="keywords" content="">
 
     <title> Bazaar - Shop healthy and smart </title>
+    
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="navbarStyles.css">
 
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
    <link rel = "stylesheet" href ="testFile.css" rel="stylesheet"/>
    <link rel = "stylesheet" href ="navBarAndFooterStyles.css" rel="stylesheet"/>
-   <style>
-		td{
-		border: 1px solid;
-		text-align: center;
-		padding: 0.5em;
-		}
-        #viewInventory{
-            background-color:teal;
-        }
-	</style>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+   <script src="js/bootstrap.min.js"></script>
+
+  <style>
+
+
+
+      </style>
+  
 </head>
 
-<body>
 
+<body >
 
-
-<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light" >
+      <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light" >
          <div class="navbar-left">
             <a class="navbar-brand" href="">
             <img class="logo-dark" src="../img/nav2.png" width="60" height="60" class="d-inline-block align-top" alt="" alt="logo"> 
@@ -85,161 +108,57 @@
          </div>
       </nav>
 
-
-
-      <!-- This section is for displaying the inventory-->
-      <h1>Inventory</h1>
-
-      <!--php code begins -->
-<?php 
-	
-    require_once "../backend/dblogin.php";
-    session_start();
-    $sellerId=$_SESSION["userId"];
-    $connect = createConn();
-   $sqlBooks= "SELECT * FROM inventory WHERE productType='book' AND sellerid='$sellerId'";
-   $sqlApparels="SELECT * FROM inventory WHERE productType='apparel' AND sellerid='$sellerId'";
-   $reasult1=$connect->query($sqlApparels);
-   $reasult = $connect->query($sqlBooks);
-   ?>
-<!--end of php code -->
-<div id="viewInventory">
-   <h1>Books Inventory</h1>
-    <table>
-    <tr>
-        <th>Product ID</th>
-       <th>Product Type</th>
-        <th>Product Name</th>
-       <th>Product Description</th>
-        <th>quantity</th>
-        <th>price per item</th>
-        <th>pictures</th>
-        <th>seller ID</th>
-    </tr>
-    <!--php code begins -->
-    <?php 
-   	while($row = $reasult->fetch_assoc()){
-           $productid=$row["productid"];
-           
-   		echo   "<tr>";
-            echo    "<td>" . $row["productid"]. "</td>";
-            echo    "<td>" . $row["productType"].  "</td>";
-            echo    "<td>" . $row["productName"]. "</td>";
-            echo    "<td>" . $row["productDescription"]. "</td>";
-            echo    "<td>" . $row["quantity"]. "</td>"; 
-            echo    "<td>" . $row["price"]. "</td>";
-            echo    "<td>";
-            echo "<img style='height:50px;'src='" . $row['picture'] . "'>";
-            echo "</td>";
-            echo    "<td>" . $row["sellerid"]. "</td>";
-            echo '<td><button><a href="editInventory.php?id='.$productid.'">Update</a></button></td>';
-            echo '<td><button><a href="deleteItem.php?id='.$productid.'">Delete</a></button></td>';
-        echo "</tr>";
-       }
-       echo'<td><button><a href="addInventory.php"> Add new item</a></button></td>';
-       echo"</table";
-       
-       echo"<table>";
-       
-       echo "<tr>";
-       echo    "<th>Product ID</th>";
-       echo    "<th>Product Type</th>";
-       echo    "<th>Product Name</th>";
-       echo    "<th>Product Description</th>";
-       echo    "<th>quantity</th>";
-       echo    "<th>price per item</th>";
-       echo    "<th>pictures</th>";
-       echo    "<th>seller ID</th>";
-   echo"</tr>";
-      while($row = $reasult1->fetch_assoc()){
-        $productid=$row["productid"];
-          
-          echo   "<tr>";
-           echo    "<td>" . $row["productid"]. "</td>";
-           echo    "<td>" . $row["productType"].  "</td>";
-           echo    "<td>" . $row["productName"]. "</td>";
-           echo    "<td>" . $row["productDescription"]. "</td>";
-           echo    "<td>" . $row["quantity"]. "</td>"; 
-           echo    "<td>" . $row["price"]. "</td>";
-           echo    "<td>";
-           echo "<img style='height:50px;'src='" . $row['picture'] . "'>";
-           echo "</td>";
-           echo    "<td>" . $row["sellerid"]. "</td>";
-           echo '<td><button><a href="editInventory.php?id='.$productid.'">Update</a></button></td>';
-           echo '<td><button><a href="deleteItem.php?id='.$productid.'">Delete</a></button></td>'; 
-       echo "</tr>";
-      }
-      echo'<td><button><a href="addInventory.php"> Add new item</a></button></td>';
-       echo"</table>";
-   $connect->close();
-   ?>
-</table>
-    </div>
-
-
-<!-- 
-<main class="main-content">
-<div class="slideshow-container">
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="../img/carousel1.jpg" alt="First slide">
-      <div class="carousel-caption d-none d-md-block">
-       
-        
-        <!-- this is for carousel overlay text
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-8 col-xl-6 mx-auto">
-              <div class="section-dialog bg-dark">
-                
-                <p class="mb-0 mt-5"> Shop with us. Healthy and Smart!</p>
-              </div>
+      <main class="mt-5 pt-4"  style="color: white;">
+         <div class="container dark-grey-text mt-5">
+            <!--Grid row-->
+            <div class="row wow fadeIn">
+               <!--Grid column-->
+               <div class="col-md-6 mb-4">
+                  <img src="<?php echo $picture; ?>" class="img-fluid" alt="" style=" border-radius: 8px;">
+               </div>
+               <!--Grid column-->
+               <div class="col-md-3 mb-4"></div>
+               <!--Grid column-->
+               <div class="col-md-3 mb-4">
+                  <!--Content-->
+                  <div class="p-4">
+                     <div class="mb-3">
+                        <a href="">
+                        <span class="badge purple mr-1"><?php echo $productType; ?></span>
+                        </a>
+                        <a href="">
+                        <span class="badge blue mr-1">New</span>
+                        </a>
+                        <a href="">
+                        <span class="badge red mr-1">Bestseller</span>
+                        </a>
+                     </div>
+                     <p class="lead" >
+                        <span class="mr-1">
+                        <del style="color:black;">$200</del>
+                        </span>
+                        <span style="color:black;"><?php echo "$".$price; ?></span>
+                     </p>
+                     <p class="lead font-weight-bold">Description</p>
+                     <p style="color: black;"><?php echo $productDescription; ?>
+                     </p>
+                     <form class="d-flex justify-content-left" method="post" action="../backend/addToCart.php">
+                        <!-- Default input -->
+                        <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
+                        <button class="btn btn-primary btn-md my-0 p" type="submit" ><a href="#">Add to cart</a>
+                        <i class="fas fa-shopping-cart ml-1"></i>
+                        </button>
+                     </form>
+                  </div>
+                  <!--Content-->
+               </div>
+               <!--Grid column-->
             </div>
-          </div>
-        </div>
-        -->
-<!-- 
-    
-  </div>
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="../img/carousel2.jpg" alt="Second slide">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>Second Slide</h5>
-        <p>Second Slide description</p>
-    </div>
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="../img/carousel3.jpg" alt="Third slide">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>Third Slide </h5>
-        <p>Third slide description</p>
-  </div>
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-</div>
-<div class = "card-container">
-<div class="flex-container">
- 
-</div>
-</main>
- -->
-
+            <!--Grid row-->
+            <hr>
+            <!--Grid row-->
+         </div>
+      </main>
 
 
       <div class="footer">
@@ -297,3 +216,17 @@
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

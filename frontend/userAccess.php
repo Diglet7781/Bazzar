@@ -9,12 +9,20 @@
       <link rel="stylesheet" type="text/css" href="slidingOverlayStyles.css">
       <link rel="stylesheet" type="text/css" href="navbarStyles.css">
       <title>Login/Sign In Page</title>
+      <style>
+      #home{
+         padding-top:0px;
+      }
+      </style>
    </head>
    <body>
+   
+      
       <div id="navBarPlaceholder"></div>
       <div class="container" id="container">
          <div class="form-container sign-up-container">
          <form method="post" action="../backend/signup.php">
+      
                <h1>Create Account</h1>
                 <div class="form-group">
                 
@@ -45,6 +53,7 @@
          </div>
          <div class="form-container sign-in-container">
             <form action="../backend/login.php" method="post">
+            <button type="button" id="home"><a href="testFile.html">Home</a></button>
                <h1>Sign In</h1>
                <input type="text" placeholder="Username" name="username">
                <input type="password" placeholder="Password" name="password">
@@ -66,10 +75,12 @@
                </div>
             </div>
          </div>
+         
       </div>
       <div id="footerPlaceholder"></div>
       <script src="slidingOverlayJayEs.js"></script>
       <script src="loadNavAndFooter.js"></script>
+      
    </body>
 </html>
 

@@ -12,23 +12,44 @@
    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
    <link rel = "stylesheet" href ="testFile.css" rel="stylesheet"/>
    <link rel = "stylesheet" href ="navBarAndFooterStyles.css" rel="stylesheet"/>
-   <style>
-		td{
-		border: 1px solid;
-		text-align: center;
-		padding: 0.5em;
-		}
-        #viewInventory{
-            background-color:teal;
-        }
-	</style>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+   <script src="js/bootstrap.min.js"></script>
+
+  <style>
+ *{
+  box-sizing: border-box;
+}
+
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  background-color:silver;
+}
+
+      img{
+         height:50px;
+      }
+      .card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 40%;
+
+      }
+      .card-text{
+         color:red;
+      }
+      .card-title{
+         color:red;
+      }
+      </style>
+  
 </head>
+
 
 <body>
 
 
 
-<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light" >
+      <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light" >
          <div class="navbar-left">
             <a class="navbar-brand" href="">
             <img class="logo-dark" src="../img/nav2.png" width="60" height="60" class="d-inline-block align-top" alt="" alt="logo"> 
@@ -87,104 +108,85 @@
 
 
 
-      <!-- This section is for displaying the inventory-->
-      <h1>Inventory</h1>
+      <strong style="color:red;"><center>Books</center></strong>
 
-      <!--php code begins -->
+
+<?php
+require_once "../backend/dblogin.php";
+$connect=createConn();
+
+
+
+$query="SELECT * FROM inventory where productType='book';";
+$result=$connect->query($query);
+while($row=$result->fetch_assoc()){
+   
+
+
+?>
+
+   
+<div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="<?php echo $row['picture'];?>" alt="Card image cap" id="images"/>
+      <div class="card-body">
+      <h5 class="card-title"><?php echo $row['productName'];?></h5>
+			
+		
+         <p class="card-text" ><?php echo "$" .$row['price'];?></p>
+         <?php
+   $productid=$row['productid'];
+         echo '<a href="productPage.php?productid='.$productid.'" class="btn btn-primary">productDetails</a>';
+         ?>
+      </div>
+  
+
+     
+<?php
+}
+echo "hello";
+?>
+
+<br>
+<br>
+<strong style="color:red;"><center>Apparel</center></strong>
 <?php 
-	
-    require_once "../backend/dblogin.php";
-    session_start();
-    $sellerId=$_SESSION["userId"];
-    $connect = createConn();
-   $sqlBooks= "SELECT * FROM inventory WHERE productType='book' AND sellerid='$sellerId'";
-   $sqlApparels="SELECT * FROM inventory WHERE productType='apparel' AND sellerid='$sellerId'";
-   $reasult1=$connect->query($sqlApparels);
-   $reasult = $connect->query($sqlBooks);
-   ?>
-<!--end of php code -->
-<div id="viewInventory">
-   <h1>Books Inventory</h1>
-    <table>
-    <tr>
-        <th>Product ID</th>
-       <th>Product Type</th>
-        <th>Product Name</th>
-       <th>Product Description</th>
-        <th>quantity</th>
-        <th>price per item</th>
-        <th>pictures</th>
-        <th>seller ID</th>
-    </tr>
-    <!--php code begins -->
-    <?php 
-   	while($row = $reasult->fetch_assoc()){
-           $productid=$row["productid"];
-           
-   		echo   "<tr>";
-            echo    "<td>" . $row["productid"]. "</td>";
-            echo    "<td>" . $row["productType"].  "</td>";
-            echo    "<td>" . $row["productName"]. "</td>";
-            echo    "<td>" . $row["productDescription"]. "</td>";
-            echo    "<td>" . $row["quantity"]. "</td>"; 
-            echo    "<td>" . $row["price"]. "</td>";
-            echo    "<td>";
-            echo "<img style='height:50px;'src='" . $row['picture'] . "'>";
-            echo "</td>";
-            echo    "<td>" . $row["sellerid"]. "</td>";
-            echo '<td><button><a href="editInventory.php?id='.$productid.'">Update</a></button></td>';
-            echo '<td><button><a href="deleteItem.php?id='.$productid.'">Delete</a></button></td>';
-        echo "</tr>";
-       }
-       echo'<td><button><a href="addInventory.php"> Add new item</a></button></td>';
-       echo"</table";
-       
-       echo"<table>";
-       
-       echo "<tr>";
-       echo    "<th>Product ID</th>";
-       echo    "<th>Product Type</th>";
-       echo    "<th>Product Name</th>";
-       echo    "<th>Product Description</th>";
-       echo    "<th>quantity</th>";
-       echo    "<th>price per item</th>";
-       echo    "<th>pictures</th>";
-       echo    "<th>seller ID</th>";
-   echo"</tr>";
-      while($row = $reasult1->fetch_assoc()){
-        $productid=$row["productid"];
-          
-          echo   "<tr>";
-           echo    "<td>" . $row["productid"]. "</td>";
-           echo    "<td>" . $row["productType"].  "</td>";
-           echo    "<td>" . $row["productName"]. "</td>";
-           echo    "<td>" . $row["productDescription"]. "</td>";
-           echo    "<td>" . $row["quantity"]. "</td>"; 
-           echo    "<td>" . $row["price"]. "</td>";
-           echo    "<td>";
-           echo "<img style='height:50px;'src='" . $row['picture'] . "'>";
-           echo "</td>";
-           echo    "<td>" . $row["sellerid"]. "</td>";
-           echo '<td><button><a href="editInventory.php?id='.$productid.'">Update</a></button></td>';
-           echo '<td><button><a href="deleteItem.php?id='.$productid.'">Delete</a></button></td>'; 
-       echo "</tr>";
-      }
-      echo'<td><button><a href="addInventory.php"> Add new item</a></button></td>';
-       echo"</table>";
-   $connect->close();
-   ?>
-</table>
-    </div>
 
+$query2="SELECT * FROM inventory where productType='apparel';";
+$result2=$connect->query($query2);
+while($row2=$result2->fetch_assoc()){
 
-<!-- 
+?>
+     
+     <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="<?php echo $row2['picture'];?>" alt="Card image cap" id="images"/>
+      <div class="card-body">
+      <h5 class="card-title"><?php echo $row2['productName'];?></h5>
+			
+		
+			<p class="card-text" ><?php echo "$" .$row2['price'];?></p>
+			<a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+
+     
+
+</div>
+<?php
+}
+echo "hello";
+?>
+  <!--
+
 <main class="main-content">
 <div class="slideshow-container">
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+     <div class="card" id="card">
+			<h4>Levis Jeans</h4>
+			<img src="images/levis.jpg" alt="levis Jeans" id="images"/>
+			<p class="list-price text-danger">List Price: <s>$24.99</s></p>
+			<p class="price">Our Price: $19.99</p>
+			<button type="button" class="btn btn-success" data-toggle="model" data-target="#details-1">Details</button>
+		</div>
   </ol>
   <div class="carousel-inner">
     <div class="carousel-item active">
@@ -192,7 +194,7 @@
       <div class="carousel-caption d-none d-md-block">
        
         
-        <!-- this is for carousel overlay text
+       this is for carousel overlay text 
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-8 col-xl-6 mx-auto">
@@ -203,8 +205,7 @@
             </div>
           </div>
         </div>
-        -->
-<!-- 
+      
     
   </div>
     </div>
@@ -238,7 +239,7 @@
  
 </div>
 </main>
- -->
+-->
 
 
 
