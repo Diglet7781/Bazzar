@@ -121,7 +121,7 @@
     
     </div>
     <br>
-    <button><a href="../frontend/viewInventory.php">viewInventory</a></button>
+    
 
                </div>
             </div>

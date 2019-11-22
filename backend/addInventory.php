@@ -50,7 +50,7 @@
         }
         else{
             echo "item added sucessfully";
-            header('Location:../frontend/addInventory.php?addInventory=success');
+            header('Location:../frontend/viewInventory.php?addInventory=success');
             
         }
     }

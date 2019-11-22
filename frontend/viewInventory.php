@@ -177,8 +177,8 @@ while($row = $reasult1->fetch_assoc()){
      echo "<img style='height:50px;'src='" . $row['picture'] . "'>";
      echo "</td>";
      echo    "<td>" . $row["sellerid"]. "</td>";
-     echo '<td><button><a href="editInventory.php?id='.$productid.'">Update</a></button></td>';
-     echo '<td><button><a href="deleteItem.php?id='.$productid.'">Delete</a></button></td>'; 
+     echo '<td><form method="get" action="../backend/editInventory.php?id='.$productid.'"><button type="submit" name="submit">Update</button></form></td>';
+     echo '<td><button><a href="/backend/deleteItem.php?id='.$productid.'">Delete</a></button></td>'; 
  echo "</tr>";
 }
 echo'<td><button><a href="addInventory.php"> Add new item</a></button></td>';
@@ -187,6 +187,11 @@ $connect->close();
 ?>
 </table>
 </div>
+<?php
+if(isset($_GET['deleteInventory'])){
+   echo "The item has been deleted sucessfully";
+}
+?>
 
 
 
