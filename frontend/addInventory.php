@@ -87,10 +87,64 @@
             </div>
             
          </div>
+
+         <!-- this is where Kundan works -->
       </nav>
+
+               
+      
+
       <div id="addInventory" style="color:black;">
-      <form id="inventoryForm"action="../backend/addinventory.php" method="post" enctype="multipart/form-data">
-            Product Name:<input type="text"name="itemName" placeholder="Product Name">
+      <form id="inventoryForm" class= "text-center border border-light p-5" action="../backend/addinventory.php" method="post" enctype="multipart/form-data">
+
+     
+
+                        <p class="h4 mb-4 text-danger">Add to Inventory</p>
+
+                       
+                        <input type="text" id="productname" class="form-control mb-4" placeholder="Product Name">
+                        <p class="h4 mb-4 text-left text-danger">Product Type:
+
+                        <div class="form-check form-check-inline text-danger">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                        <label class="form-check-label" for="inlineRadio1"> <p class= "h4 mb-2 text-left" >Book</p></label>
+                        </div>
+                        <div class="form-check form-check-inline text-danger">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                        <label class="form-check-label" for="inlineRadio2"> <p class= "h4 mb-2 ">Apparel</p></label>
+                        </div>
+                        
+                                 
+                        <input type="text" name="description" id="productname" class="form-control mb-4 text-danger" placeholder="Product Description">
+
+                        <input type="text" id="productname" name="quantity" class="form-control mb-4 text-danger" placeholder="Product Name">
+
+                        
+                        <input type="number" id="productname" name="price" class="form-control mb-4 text-danger" placeholder="Product Price Per Item">
+
+                        <p class="h4 mb-4 text-left text-danger">Upload your picture and say cheese!</p>
+                        <div class="type-file">
+                   
+                           <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                        </div>
+
+                        
+
+
+                        <div class= "Addtoinventory">
+
+                       
+                        <button class="btn btn-info btn-block my-4" type="submit">Add To Inventory</button>
+
+                        </div>
+
+
+
+                    
+                       
+
+</form>
+            <!-- Product Name:<input type="text"name="itemName" placeholder="Product Name">
             <br>
             ProductType:
             <br>
@@ -109,19 +163,14 @@
             <br><br>
             <input type="submit"name="add"value="AddToInventory">
             <br>
+
+            -->
         
         </form>
-        <?php 
-          
-          if(isset($_GET['addInventory'])){
-            $addInventory=$_GET['addInventory'];
-             echo "The item has been added sucessfully";
-          }
-        ?>
+
     
     </div>
-    <br>
-    
+   
 
                </div>
             </div>
