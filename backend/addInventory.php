@@ -1,40 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-   
-    <title>Signup</title>
-</head>
-<body>
-    <form id="inventoryForm"action="addinventory.php" method="post" enctype="multipart/form-data">
-       Product Name:<input type="text"name="itemName">
-        <br>
-        ProductType:
-        Book
-        <input type="radio"name="productType" value="book">
-        Apparel
-        <input type="radio" name="productType" value="apparel">
-        <br>
-        Description:<input type="text"name="description">
-        <br>
-        Quantity:<input type="text"name="quantity">
-        <br>
-        Price per item:<input type="text"name="price">
-        <br>
-        pictures:<input type="file"name="picture">
-        <br>
-        <input type="submit"name="add"value="add">
-        
-</form>
-<a href="viewInventory.php">View Product</a>
-<a href="userProfile.php">Profile</a>
 
-</body>
-</html>
 <?php
-    
+  
     require_once "dblogin.php";
     require_once "class/Seller.php";
     require_once "functions/validate.php";
@@ -84,7 +50,8 @@
         }
         else{
             echo "item added sucessfully";
-            header('Location:logout.php');
+            header('Location:../frontend/addInventory.php?addInventory=success');
+            
         }
     }
 ?>

@@ -111,6 +111,13 @@
             <br>
         
         </form>
+        <?php 
+          
+          if(isset($_GET['addInventory'])){
+            $addInventory=$_GET['addInventory'];
+             echo "The item has been added sucessfully";
+          }
+        ?>
     
     </div>
     <br>
