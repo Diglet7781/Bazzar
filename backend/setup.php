@@ -1,5 +1,6 @@
 <?php
   require_once "dblogin.php";
+  $
   $query = "CREATE TABLE user (
   userId INT NOT NULL AUTO_INCREMENT,
   firstName VARCHAR(128),

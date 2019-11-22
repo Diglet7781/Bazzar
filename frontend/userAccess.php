@@ -53,7 +53,7 @@
          </div>
          <div class="form-container sign-in-container">
             <form action="../backend/login.php" method="post">
-            <button type="button" id="home"><a href="testFile.html">Home</a></button>
+            <button type="button" id="home"><a href="homePage.php">Home</a></button>
                <h1>Sign In</h1>
                <input type="text" placeholder="Username" name="username">
                <input type="password" placeholder="Password" name="password">

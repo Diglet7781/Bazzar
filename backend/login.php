@@ -27,10 +27,10 @@
                     switch ($type)
                                     {
                                         case 'Seller':
-                                         header('Location:../frontend/testFile.php');
+                                         header('Location:../frontend/homePage.php');
                                         exit();
                                         case 'Buyer':
-                                        header('Location:viewHomepage.php');
+                                        header('Location:../frontend/homePage.php');
                                         exit();
                                         default:
                                         header("Location:viewHomepage.php");

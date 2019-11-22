@@ -7,7 +7,7 @@
         session_start();
         session_destroy();
         
-        header("Location:../frontend/testFile.php");
+        header("Location:../frontend/homePage.php");
     ?> 
    
            

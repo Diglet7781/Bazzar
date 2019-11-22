@@ -68,7 +68,8 @@
                      echo '<button  class="btn btn-danger"><a href="viewProfile.php">View Profile</a></button>';
                      echo "   ";
                      echo '<button  class="btn btn-danger"><a href="viewInventory.php">View Inventory</a></button>';
-                     
+                     echo "   ";
+                     echo '<button class="btn btn-danger"><a href="addInventory.php">Add Inventory</a></button>';
                      echo "   ";
                      echo '<button  class="btn btn-danger"><a href="../backend/logout.php">Logout</a></button>';
                   }else if($_SESSION['type']="Buyer"){
@@ -88,34 +89,188 @@
             
          </div>
       </nav>
-      <div id="addInventory" style="color:black;">
-      <form id="inventoryForm"action="../backend/addinventory.php" method="post" enctype="multipart/form-data">
-            Product Name:<input type="text"name="itemName" placeholder="Product Name">
-            <br>
-            ProductType:
-            <br>
-            Book
-            <input type="radio"name="productType" value="book">
-            Apparel
-            <input type="radio" name="productType" value="apparel">
-            <br>
-            Description:<input type="text"name="description" placeholder="product description">
-            <br>
-            Quantity:<input type="text"name="quantity" placeholder="quantity">
-            <br>
-            Price per item:<input type="text"name="price" placeholder="price">
-            <br>
-            pictures:<input type="file"name="picture">
-            <br><br>
-            <input type="submit"name="add"value="AddToInventory">
-            <br>
-        
-        </form>
-    
-    </div>
-    <br>
-    <button><a href="../frontend/viewInventory.php">viewInventory</a></button>
+      <div class="slideshow-container">
+         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+               <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+               <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+               <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+               <div class="carousel-item active">
+                  <img class="d-block w-100" src="img/carousel1.jpg" alt="First slide">
+                  <div class="carousel-caption d-none d-md-block">
+                     <div class="container-fluid">
+                        <div class="row">
+                           <div class="col-md-8 col-xl-6 mx-auto">
+                              <div class="section-dialog bg-dark">
+                                 <p class="mb-0 mt-5"> Shop with us. Healthy and Smart!</p>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="carousel-item">
+                  <img class="d-block w-100" src="img/carousel2.jpg" alt="Second slide">
+                  <div class="carousel-caption d-none d-md-block">
+                     <h5>Second Slide</h5>
+                     <p>Second Slide description</p>
+                  </div>
+               </div>
+               <div class="carousel-item">
+                  <img class="d-block w-100" src="img/carousel3.jpg" alt="Third slide">
+                  <div class="carousel-caption d-none d-md-block">
+                     <h5>Third Slide </h5>
+                     <p>Third slide description</p>
+                  </div>
+               </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+            </a>
+         </div>
 
+         <!--From here Card begins -->
+
+         <div class = "label-heading">
+
+         <center><h2 style="color:red;"> Our Best Deals </h2></center>
+
+         </div>
+
+<!-- 
+   php code begins
+-->
+
+<?php
+require_once "../backend/dblogin.php";
+$connect=createConn();
+
+
+
+$query="SELECT * FROM inventory where productType='book';";
+$result=$connect->query($query);
+while($row=$result->fetch_assoc()){
+   
+
+
+?>
+
+         <div >
+            <div class="card-deck container-fluid text-dark pt-3">
+               <div class="card">
+               <h5 class="card-title"><?php echo $row['productName'];?></h5>
+                  
+                  <div class="card-body">
+                  <img style="height:50px; " src="<?php echo $row['picture'];?>" class="card-img d-flex align-self-center" alt="...">
+            </div>
+                  <div class="card-footer">
+                     <small class="text-muted"><button>Add to Cart<i class="fa fa-cart-plus"></i></button></small>
+                  </div>
+               </div>
+
+               <?php
+}
+?> 
+
+
+<?php
+
+
+
+
+$query1="SELECT * FROM inventory where productType='apparel';";
+$result1=$connect->query($query1);
+while($row1=$result1->fetch_assoc()){
+   
+
+
+?>
+         <div >
+            <div class="card-deck container-fluid text-dark pt-3">
+               <div class="card">
+               <h5 class="card-title"><?php echo $row1['productName'];?></h5>
+                  
+                  <div class="card-body">
+                  <img style="height:50px; " src="<?php echo $row1['picture'];?>" class="card-img d-flex align-self-center" alt="...">
+                  </div>
+                  <div class="card-footer">
+                     <small class="text-muted"><button>Add to Cart<i class="fa fa-cart-plus"></i></button></small>
+                  </div>
+               </div>
+               <?php
+}
+?>
+
+
+
+
+<!--
+               <div class="card">
+                  <img src="<?php echo $row['picture'];?>" class="card-img-top" alt="...">
+                  <div class="card-body">
+                     <h5 class="card-title">Product</h5>
+                  </div>
+                  <div class="card-footer">
+                     <small class="text-muted"><button>Add to Cart <i class="fa fa-cart-plus"></i></button></small>
+                  </div>
+--> 
+               <!-- </div>
+               <div class="card">
+                  <img src="untitled.png" class="card-img-top" alt="...">
+                  <div class="card-body">
+                     <h5 class="card-title">Product</h5>
+                  </div>
+                  <div class="card-footer">
+                     <small class="text-muted"><button>Add to Cart <i class="fa fa-cart-plus"></i></button></small>
+                  </div>
+               </div>
+               <div class="card">
+                  <img src="untitled.png" class="card-img-top" alt="...">
+                  <div class="card-body">
+                     <h5 class="card-title">Product</h5>
+                  </div>
+                  <div class="card-footer">
+                     <small class="text-muted"><button>Add to Cart <i class="fa fa-cart-plus"></i></button></small>
+                  </div>
+               </div>
+               <div class="card">
+                  <img src="untitled.png" class="card-img-top" alt="...">
+                  <div class="card-body">
+                     <h5 class="card-title">Product</h5>
+                  </div>
+                  <div class="card-footer">
+                     <small class="text-muted"><button>Add to Cart <i class="fa fa-cart-plus"></i></button></small>
+                  </div>
+               </div> 
+                        <div class="carousel-item">
+                           <img class="d-block w-100" src="two.jpg" alt="Second slide">
+                           <div class="carousel-caption d-none d-md-block">
+                              <h5>M.E.T.H.O.D</h5>
+                           </div>
+                        </div>
+                        <div class="carousel-item">
+                           <img class="d-block w-100" src="three.jpg" alt="Third slide">
+                           <div class="carousel-caption d-none d-md-block">
+                              <h5>Tour BUS</h5>
+                           </div>
+                        </div>
+                     </div>
+                     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                     <span class="sr-only">Previous</span>
+                     </a>
+                     <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                     <span class="sr-only">Next</span>
+                     </a>
+                  </div>-->
                </div>
             </div>
          </div>
@@ -169,12 +324,3 @@
       <script type="text/javascript" src="script.js"></script>
    </body>
 </html>
-
-
-
-
-
-
-
-
-
