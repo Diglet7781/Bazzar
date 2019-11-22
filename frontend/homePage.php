@@ -16,13 +16,6 @@
             color: #FFFFFF;
     text-decoration: none;
          }
-        
-		td{
-		border: 1px solid;
-		text-align: center;
-		padding: 0.5em;
-		}
-	
      
          </style>
 </head>
@@ -73,10 +66,10 @@
                if(isset($_SESSION['username'])){
                   if($_SESSION['type']== "Seller"){
                      echo '<button  class="btn btn-danger"><a href="viewProfile.php">View Profile</a></button>';
-                    
                      echo "   ";
-                     echo '<button  class="btn btn-danger"><a href="addInventory.php">Add Inventory</a></button>';
-                     
+                     echo '<button  class="btn btn-danger"><a href="viewInventory.php">View Inventory</a></button>';
+                     echo "   ";
+                     echo '<button class="btn btn-danger"><a href="addInventory.php">Add Inventory</a></button>';
                      echo "   ";
                      echo '<button  class="btn btn-danger"><a href="../backend/logout.php">Logout</a></button>';
                   }else if($_SESSION['type']="Buyer"){
@@ -96,105 +89,192 @@
             
          </div>
       </nav>
-      
-      
-<div style="color:black;">
+      <div class="slideshow-container">
+         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+               <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+               <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+               <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+               <div class="carousel-item active">
+                  <img class="d-block w-100" src="img/carousel1.jpg" alt="First slide">
+                  <div class="carousel-caption d-none d-md-block">
+                     <div class="container-fluid">
+                        <div class="row">
+                           <div class="col-md-8 col-xl-6 mx-auto">
+                              <div class="section-dialog bg-dark">
+                                 <p class="mb-0 mt-5"> Shop with us. Healthy and Smart!</p>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="carousel-item">
+                  <img class="d-block w-100" src="img/carousel2.jpg" alt="Second slide">
+                  <div class="carousel-caption d-none d-md-block">
+                     <h5>Second Slide</h5>
+                     <p>Second Slide description</p>
+                  </div>
+               </div>
+               <div class="carousel-item">
+                  <img class="d-block w-100" src="img/carousel3.jpg" alt="Third slide">
+                  <div class="carousel-caption d-none d-md-block">
+                     <h5>Third Slide </h5>
+                     <p>Third slide description</p>
+                  </div>
+               </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+            </a>
+         </div>
 
-<h1>Inventory</h1>
+         <!--From here Card begins -->
 
-<!--php code begins -->
-<?php 
+         <div class = "label-heading">
 
-require_once "../backend/dblogin.php";
+         <center><h2 style="color:red;"> Our Best Deals </h2></center>
 
-$sellerId=$_SESSION["userId"];
-$connect = createConn();
-$sqlBooks= "SELECT * FROM inventory WHERE productType='book' AND sellerid='$sellerId'";
-$sqlApparels="SELECT * FROM inventory WHERE productType='apparel' AND sellerid='$sellerId'";
-$reasult1=$connect->query($sqlApparels);
-$reasult = $connect->query($sqlBooks);
-?>
-<!--end of php code -->
-<div id="viewInventory">
-<h1>Books Inventory</h1>
-<table>
-<tr>
-  <th>Product ID</th>
- <th>Product Type</th>
-  <th>Product Name</th>
- <th>Product Description</th>
-  <th>quantity</th>
-  <th>price per item</th>
-  <th>pictures</th>
-  <th>seller ID</th>
-</tr>
-<!--php code begins -->
-<?php 
-while($row = $reasult->fetch_assoc()){
-     $productid=$row["productid"];
-     
-   echo   "<tr>";
-      echo    "<td>" . $row["productid"]. "</td>";
-      echo    "<td>" . $row["productType"].  "</td>";
-      echo    "<td>" . $row["productName"]. "</td>";
-      echo    "<td>" . $row["productDescription"]. "</td>";
-      echo    "<td>" . $row["quantity"]. "</td>"; 
-      echo    "<td>" . $row["price"]. "</td>";
-      echo    "<td>";
-      echo "<img style='height:50px;'src='" . $row['picture'] . "'>";
-      echo "</td>";
-      echo    "<td>" . $row["sellerid"]. "</td>";
-      echo '<td><button><a href="editInventory.php?id='.$productid.'">Update</a></button></td>';
-      echo '<td><button><a href="deleteItem.php?id='.$productid.'">Delete</a></button></td>';
-  echo "</tr>";
- }
- echo'<td><button><a href="addInventory.php"> Add new item</a></button></td>';
- echo"</table";
- 
- echo"<table>";
- 
- echo "<tr>";
- echo    "<th>Product ID</th>";
- echo    "<th>Product Type</th>";
- echo    "<th>Product Name</th>";
- echo    "<th>Product Description</th>";
- echo    "<th>quantity</th>";
- echo    "<th>price per item</th>";
- echo    "<th>pictures</th>";
- echo    "<th>seller ID</th>";
-echo"</tr>";
-while($row = $reasult1->fetch_assoc()){
-  $productid=$row["productid"];
-    
-    echo   "<tr>";
-     echo    "<td>" . $row["productid"]. "</td>";
-     echo    "<td>" . $row["productType"].  "</td>";
-     echo    "<td>" . $row["productName"]. "</td>";
-     echo    "<td>" . $row["productDescription"]. "</td>";
-     echo    "<td>" . $row["quantity"]. "</td>"; 
-     echo    "<td>" . $row["price"]. "</td>";
-     echo    "<td>";
-     echo "<img style='height:50px;'src='" . $row['picture'] . "'>";
-     echo "</td>";
-     echo    "<td>" . $row["sellerid"]. "</td>";
-     echo '<td><form method="get" action="../backend/editInventory.php?id='.$productid.'"><button type="submit" name="submit">Update</button></form></td>';
-     echo '<td><button><a href="/backend/deleteItem.php?id='.$productid.'">Delete</a></button></td>'; 
- echo "</tr>";
-}
-echo'<td><button><a href="addInventory.php"> Add new item</a></button></td>';
- echo"</table>";
-$connect->close();
-?>
-</table>
-</div>
+         </div>
+
+<!-- 
+   php code begins
+-->
+
 <?php
-if(isset($_GET['deleteInventory'])){
-   echo "The item has been deleted sucessfully";
+require_once "../backend/dblogin.php";
+$connect=createConn();
+
+
+
+$query="SELECT * FROM inventory where productType='book';";
+$result=$connect->query($query);
+while($row=$result->fetch_assoc()){
+   
+
+
+?>
+
+         <div >
+            <div class="card-deck container-fluid text-dark pt-3">
+               <div class="card">
+               <h5 class="card-title"><?php echo $row['productName'];?></h5>
+                  
+                  <div class="card-body">
+                  <img style="height:50px; " src="<?php echo $row['picture'];?>" class="card-img d-flex align-self-center" alt="...">
+            </div>
+                  <div class="card-footer">
+                     <small class="text-muted"><button>Add to Cart<i class="fa fa-cart-plus"></i></button></small>
+                  </div>
+               </div>
+
+               <?php
+}
+?> 
+
+
+<?php
+
+
+
+
+$query1="SELECT * FROM inventory where productType='apparel';";
+$result1=$connect->query($query1);
+while($row1=$result1->fetch_assoc()){
+   
+
+
+?>
+         <div >
+            <div class="card-deck container-fluid text-dark pt-3">
+               <div class="card">
+               <h5 class="card-title"><?php echo $row1['productName'];?></h5>
+                  
+                  <div class="card-body">
+                  <img style="height:50px; " src="<?php echo $row1['picture'];?>" class="card-img d-flex align-self-center" alt="...">
+                  </div>
+                  <div class="card-footer">
+                     <small class="text-muted"><button>Add to Cart<i class="fa fa-cart-plus"></i></button></small>
+                  </div>
+               </div>
+               <?php
 }
 ?>
 
 
 
+
+<!--
+               <div class="card">
+                  <img src="<?php echo $row['picture'];?>" class="card-img-top" alt="...">
+                  <div class="card-body">
+                     <h5 class="card-title">Product</h5>
+                  </div>
+                  <div class="card-footer">
+                     <small class="text-muted"><button>Add to Cart <i class="fa fa-cart-plus"></i></button></small>
+                  </div>
+--> 
+               <!-- </div>
+               <div class="card">
+                  <img src="untitled.png" class="card-img-top" alt="...">
+                  <div class="card-body">
+                     <h5 class="card-title">Product</h5>
+                  </div>
+                  <div class="card-footer">
+                     <small class="text-muted"><button>Add to Cart <i class="fa fa-cart-plus"></i></button></small>
+                  </div>
+               </div>
+               <div class="card">
+                  <img src="untitled.png" class="card-img-top" alt="...">
+                  <div class="card-body">
+                     <h5 class="card-title">Product</h5>
+                  </div>
+                  <div class="card-footer">
+                     <small class="text-muted"><button>Add to Cart <i class="fa fa-cart-plus"></i></button></small>
+                  </div>
+               </div>
+               <div class="card">
+                  <img src="untitled.png" class="card-img-top" alt="...">
+                  <div class="card-body">
+                     <h5 class="card-title">Product</h5>
+                  </div>
+                  <div class="card-footer">
+                     <small class="text-muted"><button>Add to Cart <i class="fa fa-cart-plus"></i></button></small>
+                  </div>
+               </div> 
+                        <div class="carousel-item">
+                           <img class="d-block w-100" src="two.jpg" alt="Second slide">
+                           <div class="carousel-caption d-none d-md-block">
+                              <h5>M.E.T.H.O.D</h5>
+                           </div>
+                        </div>
+                        <div class="carousel-item">
+                           <img class="d-block w-100" src="three.jpg" alt="Third slide">
+                           <div class="carousel-caption d-none d-md-block">
+                              <h5>Tour BUS</h5>
+                           </div>
+                        </div>
+                     </div>
+                     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                     <span class="sr-only">Previous</span>
+                     </a>
+                     <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                     <span class="sr-only">Next</span>
+                     </a>
+                  </div>-->
+               </div>
+            </div>
+         </div>
+      </div>
       <div class="footer">
          <div id="button"></div>
          <div class="pt-1"></div>
@@ -244,12 +324,3 @@ if(isset($_GET['deleteInventory'])){
       <script type="text/javascript" src="script.js"></script>
    </body>
 </html>
-
-
-
-
-
-
-
-
-

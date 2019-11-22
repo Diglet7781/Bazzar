@@ -9,7 +9,9 @@
     echo "Connected successfully";
     $sql= "Delete FROM inventory WHERE productid='$id'";
     if($connect->query($sql) === TRUE){
-        echo"item deleted sucessfully";
+        echo "hello";
+        header("Location: ../frontend/viewInventory.php?deleteInventory=success");
+        
     }else{
         echo"Errorr deleting record: ". $connect->error;
     }
