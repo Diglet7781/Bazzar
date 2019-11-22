@@ -98,6 +98,10 @@ if (isset($_POST["submit"])){
         }
         else
             echo "Account Created Successfully";
+            session_start();
+            $_SESSION['username']=$_POST['username'];
+            $_SESSION['type']=$_POST['accountType'];
+            header("Location: ../frontend/homePage.php");
     }
 }
 }

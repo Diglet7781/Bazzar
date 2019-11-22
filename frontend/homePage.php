@@ -65,7 +65,7 @@
                <?php
                if(isset($_SESSION['username'])){
                   if($_SESSION['type']== "Seller"){
-                     echo '<button  class="btn btn-danger"><a href="viewProfile.php">View Profile</a></button>';
+                     echo '<button  class="btn btn-danger"><a href="profilePage.php">View Profile</a></button>';
                      echo "   ";
                      echo '<button  class="btn btn-danger"><a href="viewInventory.php">View Inventory</a></button>';
                      echo "   ";
@@ -73,7 +73,7 @@
                      echo "   ";
                      echo '<button  class="btn btn-danger"><a href="../backend/logout.php">Logout</a></button>';
                   }else if($_SESSION['type']="Buyer"){
-                     echo '<button  class="btn btn-danger"><a href="viewProfile.php">View Profile</a></button>';
+                     echo '<button  class="btn btn-danger"><a href="profilePage.php">View Profile</a></button>';
                      echo "   ";
                      echo '<button  class="btn btn-danger"><a href="cart-view.php">View Cart</a></button>';
                      echo "  ";
@@ -89,6 +89,7 @@
             
          </div>
       </nav>
+
       <div class="slideshow-container">
          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
